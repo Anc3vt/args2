@@ -1,5 +1,5 @@
 # args2
-###Argument string parser to convenient data accessor
+### Argument string parser to convenient data accessor
 
 It makes sense to use the Args class in the **main** method, where we
 get an array of arguments as strings.
