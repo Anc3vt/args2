@@ -17,6 +17,13 @@
         </license>
     </licenses>
 
+    <distributionManagement>
+        <repository>
+            <id>ancevt</id>
+            <url>https://ancevt.ru:10443/releases</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
