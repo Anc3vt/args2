@@ -20,7 +20,7 @@
     <distributionManagement>
         <repository>
             <id>ancevt</id>
-            <url>https://ancevt.ru:10443/releases</url>
+            <url>http://ancevt.ru:8080/releases</url>
         </repository>
     </distributionManagement>
 
