@@ -30,7 +30,7 @@ You can use the default value by passing it as an argument:
 
 Check if an argument has been passed:
 
-    boolean debugMode = arguments.get(Boolean.class, "--debugBode");
+    boolean debugMode = arguments.get(Boolean.class, "--debugMode");
 
 If you pass not a string, but an array of strings as a key, each element of this array is checked.
 This is how key aliases are supported, for example:
