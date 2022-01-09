@@ -1,6 +1,6 @@
-/**
+/*
  *   Args II
- *   Copyright (C) 2020 Ancevt
+ *   Copyright (C) 2020 Ancevt (i@ancevt.ru)
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
  */
 package ru.ancevt.util.args;
 
+import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author <a href="mailto:i@ancevt.ru">ancevt</a>

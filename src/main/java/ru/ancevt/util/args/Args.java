@@ -1,4 +1,4 @@
-/**
+/*
  *   Args II
  *   Copyright (C) 2020 Ancevt
  *
