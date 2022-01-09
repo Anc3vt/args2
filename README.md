@@ -19,7 +19,7 @@ new Args("--host localhost --port 8080 --debugMode")
 
 Now we have access to data through special methods of the **Args** class:
 
-```
+```java
 String host = arguments.get("--host"); // localhost
 int port = arguments.get(Integer.class, "--port"); // 8080
 ```
