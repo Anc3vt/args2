@@ -20,10 +20,6 @@ package ru.ancevt.util.args;
 import lombok.NonNull;
 import lombok.ToString;
 
-/**
- * @author <a href="mailto:i@ancevt.ru">ancevt</a>
- * Created on Aug 21, 2020
- */
 @ToString
 public class Args {
 

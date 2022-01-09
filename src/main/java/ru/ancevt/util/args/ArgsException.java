@@ -17,10 +17,6 @@
  */
 package ru.ancevt.util.args;
 
-/**
- * @author <a href="mailto:i@ancevt.ru">ancevt</a>
- * Created on Aug 22, 2020
- */
 public class ArgsException extends RuntimeException {
 
     public ArgsException(String message) {

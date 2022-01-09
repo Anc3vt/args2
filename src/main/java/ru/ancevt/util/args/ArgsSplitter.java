@@ -22,10 +22,6 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-/**
- * @author <a href="mailto:i@ancevt.ru">ancevt</a>
- * Created on Aug 21, 2020
- */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 class ArgsSplitter {
 
