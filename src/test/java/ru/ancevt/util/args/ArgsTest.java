@@ -46,7 +46,7 @@ class ArgsTest {
     @Test
     void testDefaultValue() {
         final Args args = new Args("command --host ancevt.ru --port 1234 -d true");
-        assertThat(args.get(Long.class, "--some", 2L), is(2L));
+        assertThat(args.get(long.class, "--some", 2L), is(2L));
     }
 
     @Test

@@ -115,22 +115,22 @@ public class Args {
         return get(String.class, keys);
     }
 
-    private <T> T convertToType(String element, Class<T> type) {
+    private <T> T convertToType(String element, Class<?> type) {
         if (type == String.class) {
             return (T) element;
-        } else if (type == Boolean.class) {
+        } else if (type == Boolean.class || type == boolean.class) {
             return (T) (Boolean.parseBoolean(element) ? Boolean.TRUE : Boolean.FALSE);
-        } else if (type == Integer.class) {
+        } else if (type == Integer.class || type == int.class) {
             return (T) Integer.valueOf(element);
-        } else if (type == Long.class) {
+        } else if (type == Long.class || type == long.class) {
             return (T) Long.valueOf(element);
-        } else if (type == Float.class) {
+        } else if (type == Float.class || type == float.class) {
             return (T) Float.valueOf(element);
-        } else if (type == Short.class) {
+        } else if (type == Short.class || type == short.class) {
             return (T) Short.valueOf(element);
-        } else if (type == Double.class) {
+        } else if (type == Double.class || type == double.class) {
             return (T) Double.valueOf(element);
-        } else if (type == Byte.class) {
+        } else if (type == Byte.class || type == byte.class) {
             return (T) Byte.valueOf(element);
         } else {
             throw new ArgsException("Type " + type + " not supported");
