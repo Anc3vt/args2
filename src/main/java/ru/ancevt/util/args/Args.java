@@ -65,6 +65,16 @@ public class Args {
         return false;
     }
 
+    public <T> T get(Class<?> type, int index, T defaultValue) {
+        if (index < 0 || index >= elements.length) return defaultValue;
+
+        return convertToType(elements[index], type);
+    }
+
+    public <T> T get(Class<?> type, int index) {
+        return get(type, index, null);
+    }
+
     public <T> T get(Class<T> type, String key, T defaultValue) {
         for (int i = 0; i < elements.length - 1; i++) {
             final String currentArgs = elements[i];
