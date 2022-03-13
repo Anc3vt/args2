@@ -15,7 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package ru.ancevt.util.args;
+package com.ancevt.util.args;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +31,10 @@ class ArgsTest {
 
     @Test
     void testCommon() {
-        final Args args = new Args("command --host ancevt.ru --port 1234 -d true");
+        final Args args = new Args("command --host ancevt.com --port 1234 -d true");
 
         final String host = args.get("--host", "default.host");
-        assertThat(host, is("ancevt.ru"));
+        assertThat(host, is("ancevt.com"));
 
         final int port = args.get(Integer.class, "--port", 7777);
         assertThat(port, is(1234));
@@ -45,7 +45,7 @@ class ArgsTest {
 
     @Test
     void testDefaultValue() {
-        final Args args = new Args("command --host ancevt.ru --port 1234 -d true");
+        final Args args = new Args("command --host ancevt.com --port 1234 -d true");
         assertThat(args.get(long.class, "--some", 2L), is(2L));
     }
 
