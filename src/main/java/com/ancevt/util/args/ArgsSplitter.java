@@ -1,6 +1,6 @@
 /*
  *   Args II
- *   Copyright (C) 2020 Ancevt (i@ancevt.ru)
+ *   Copyright (C) 2020 Ancevt (me@ancevt.com)
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,17 +17,16 @@
  */
 package com.ancevt.util.args;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class ArgsSplitter {
 
     private static final String SPACE_CHARS = "\n\t\r\b ";
 
-    public static String[] split(final String source) {
+    static String @NotNull [] split(final @NotNull String source) {
         final List<String> list = new ArrayList<>();
         final StringBuilder stringBuilder = new StringBuilder();
         int str = -1;

@@ -1,6 +1,6 @@
 /*
  *   Args II
- *   Copyright (C) 2020 Ancevt (i@ancevt.ru)
+ *   Copyright (C) 2020 Ancevt (me@ancevt.com)
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * @author <a href="mailto:i@ancevt.ru">ancevt</a>
+ * @author <a href="mailto:me@ancevt.com">ancevt</a>
  * Created on Aug 21, 2020
  */
 class ArgsTest {

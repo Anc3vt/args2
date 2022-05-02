@@ -17,27 +17,35 @@
  */
 package com.ancevt.util.args;
 
-import lombok.NonNull;
-import lombok.ToString;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-@ToString
+import java.util.Optional;
+
 public class Args {
+
+    public static void main(String[] args) {
+        String source = "localhost --message \"this is the message\" -p 3333 -h localhost --debug true ";
+        Args a = new Args(source);
+
+        System.out.println(a.get("--message"));
+    }
 
     private final String source;
 
     private final String[] elements;
 
-    public Args(@NonNull String source) {
+    public Args(String source) {
         this.source = source;
         elements = ArgsSplitter.split(source);
     }
 
-    public Args(@NonNull String[] args) {
+    public Args(String[] args) {
         this.source = collectSource(args);
         elements = args;
     }
 
-    private String collectSource(String[] args) {
+    private @NotNull String collectSource(String @NotNull [] args) {
         final StringBuilder stringBuilder = new StringBuilder();
         for (String a : args) {
             a = a.replace("\"", "\\\\\"");
@@ -65,13 +73,13 @@ public class Args {
         return false;
     }
 
-    public <T> T get(Class<?> type, int index, T defaultValue) {
+    public <T> T get(Class<T> type, int index, T defaultValue) {
         if (index < 0 || index >= elements.length) return defaultValue;
 
         return convertToType(elements[index], type);
     }
 
-    public <T> T get(Class<?> type, int index) {
+    public <T> T get(Class<T> type, int index) {
         return get(type, index, null);
     }
 
@@ -87,7 +95,7 @@ public class Args {
         return defaultValue;
     }
 
-    public <T> T get(Class<T> type, String[] keys, T defaultValue) {
+    public <T> T get(Class<T> type, String @NotNull [] keys, T defaultValue) {
         for (final String key : keys) {
             for (int i = 0; i < elements.length - 1; i++) {
                 final String currentArgs = elements[i];
@@ -125,7 +133,7 @@ public class Args {
         return get(String.class, keys);
     }
 
-    private <T> T convertToType(String element, Class<?> type) {
+    private <T> T convertToType(String element, Class<T> type) {
         if (type == String.class) {
             return (T) element;
         } else if (type == Boolean.class || type == boolean.class) {
@@ -153,6 +161,14 @@ public class Args {
 
     public boolean isEmpty() {
         return elements == null || elements.length == 0;
+    }
+
+    public static @NotNull Args of(String source) {
+        return new Args(source);
+    }
+
+    public static @NotNull Args of(String[] args) {
+        return new Args(args);
     }
 
 }
