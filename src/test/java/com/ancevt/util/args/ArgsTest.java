@@ -61,6 +61,20 @@ class ArgsTest {
     }
 
     @Test
+    void testDelimiter() {
+        final Args args = new Args("20,30,40,50", ',');
+        assertThat(args.next(), is("20"));
+        assertThat(args.next(int.class), is(30));
+    }
+
+    @Test
+    void testDelimiterStringChar() {
+        final Args args = new Args("20,30,40,50", ",");
+        assertThat(args.next(), is("20"));
+        assertThat(args.next(int.class), is(30));
+    }
+
+    @Test
     void testCommon() {
         final Args args = new Args("command --host ancevt.com --port 1234 -d true");
 

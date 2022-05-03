@@ -26,7 +26,7 @@ class ArgsSplitter {
 
     private static final String SPACE_CHARS = "\n\t\r\b ";
 
-    static String @NotNull [] split(final @NotNull String source) {
+    static String @NotNull [] split(final @NotNull String source, char delimiterChar) {
         final List<String> list = new ArrayList<>();
         final StringBuilder stringBuilder = new StringBuilder();
         int str = -1;
@@ -47,12 +47,23 @@ class ArgsSplitter {
                     str = c;
                     continue;
                 }
-                if (SPACE_CHARS.indexOf(c) != -1) {
-                    if (stringBuilder.length() != 0) {
-                        list.add(stringBuilder.toString());
-                        stringBuilder.setLength(0);
+
+                if (delimiterChar == '\0') {
+                    if (SPACE_CHARS.indexOf(c) != -1) {
+                        if (stringBuilder.length() != 0) {
+                            list.add(stringBuilder.toString());
+                            stringBuilder.setLength(0);
+                        }
+                        continue;
                     }
-                    continue;
+                } else {
+                    if (c == delimiterChar) {
+                        if (stringBuilder.length() != 0) {
+                            list.add(stringBuilder.toString());
+                            stringBuilder.setLength(0);
+                        }
+                        continue;
+                    }
                 }
             } else {
                 if (c == str) {
@@ -67,5 +78,12 @@ class ArgsSplitter {
         }
 
         return list.toArray(new String[]{});
+    }
+
+    public static String @NotNull [] split(String source, @NotNull String delimiterChar) {
+        if (delimiterChar.length() != 1) {
+            throw new ArgsException("delimiter string must contain one character");
+        }
+        return split(source, delimiterChar.charAt(0));
     }
 }
