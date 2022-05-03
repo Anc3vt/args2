@@ -17,6 +17,14 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>ancevt</id>
+            <name>Ancevt</name>
+            <email>me@ancevt.com</email>
+        </developer>
+    </developers>
+
     <distributionManagement>
         <repository>
             <id>internal.repo</id>
