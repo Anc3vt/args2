@@ -30,6 +30,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ArgsTest {
 
     @Test
+    void testNextString() {
+        final Args args = new Args("a b c d");
+        String a = args.next();
+        assertThat(a, is("a"));
+
+        String b = args.next();
+        assertThat(b, is("b"));
+
+        args.next();
+
+        String d = args.next();
+        assertThat(d, is("d"));
+    }
+
+    @Test
+    void testNext() {
+        final Args args = new Args("a 1 2.5 true");
+        String a = args.next(String.class);
+        assertThat(a, is("a"));
+
+        int i = args.next(int.class);
+        assertThat(i, is(1));
+
+        float f = args.next(float.class);
+        assertThat(f, is(2.5f));
+
+        boolean b = args.next(boolean.class);
+        assertThat(b, is(true));
+    }
+
+    @Test
     void testCommon() {
         final Args args = new Args("command --host ancevt.com --port 1234 -d true");
 

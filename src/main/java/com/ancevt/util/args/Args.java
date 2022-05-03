@@ -17,10 +17,9 @@
  */
 package com.ancevt.util.args;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
+import static java.lang.String.format;
 
 public class Args {
 
@@ -34,6 +33,8 @@ public class Args {
     private final String source;
 
     private final String[] elements;
+
+    private int index;
 
     public Args(String source) {
         this.source = source;
@@ -71,6 +72,40 @@ public class Args {
         }
 
         return false;
+    }
+
+    public String next() {
+        return next(String.class);
+    }
+
+    public <T> T next(Class<T> type) {
+        if(index >= elements.length) {
+            throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
+        }
+
+        T result = get(type, index);
+        index++;
+        return result;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        if(index >= elements.length) {
+            throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
+        }
+
+        this.index = index;
+    }
+
+    public void resetIndex() {
+        index = 0;
+    }
+
+    public int size() {
+        return elements.length;
     }
 
     public <T> T get(Class<T> type, int index, T defaultValue) {
