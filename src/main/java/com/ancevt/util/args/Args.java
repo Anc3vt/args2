@@ -38,7 +38,17 @@ public class Args {
 
     public Args(String source) {
         this.source = source;
-        elements = ArgsSplitter.split(source);
+        elements = ArgsSplitter.split(source, '\0');
+    }
+
+    public Args(String source, String delimiter) {
+        this.source = source;
+        elements = ArgsSplitter.split(source, delimiter);
+    }
+
+    public Args(String source, char delimiter) {
+        this.source = source;
+        elements = ArgsSplitter.split(source, delimiter);
     }
 
     public Args(String[] args) {
