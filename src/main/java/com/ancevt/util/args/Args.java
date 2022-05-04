@@ -18,23 +18,19 @@
 package com.ancevt.util.args;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static java.lang.String.format;
 
 public class Args {
-
-    public static void main(String[] args) {
-        String source = "localhost --message \"this is the message\" -p 3333 -h localhost --debug true ";
-        Args a = new Args(source);
-
-        System.out.println(a.get("--message"));
-    }
 
     private final String source;
 
     private final String[] elements;
 
     private int index;
+
+    private Throwable problem;
 
     public Args(@NotNull String source) {
         this.source = source;
@@ -98,6 +94,16 @@ public class Args {
         return result;
     }
 
+    public <T> T next(Class<T> type, T defaultValue) {
+        if (index >= elements.length) {
+            throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
+        }
+
+        T result = get(type, index, defaultValue);
+        index++;
+        return result;
+    }
+
     public int getIndex() {
         return index;
     }
@@ -121,7 +127,12 @@ public class Args {
     public <T> T get(Class<T> type, int index, T defaultValue) {
         if (index < 0 || index >= elements.length) return defaultValue;
 
-        return convertToType(elements[index], type);
+        try {
+            return convertToType(elements[index], type);
+        } catch (Exception e) {
+            problem = e;
+            return defaultValue;
+        }
     }
 
     public <T> T get(Class<T> type, int index) {
@@ -178,22 +189,22 @@ public class Args {
         return get(String.class, keys);
     }
 
-    private <T> T convertToType(String element, Class<T> type) {
+    private <T> @Nullable T convertToType(String element, Class<T> type) {
         if (type == String.class) {
             return (T) element;
-        } else if (type == Boolean.class || type == boolean.class) {
+        } else if (type == boolean.class || type == Boolean.class) {
             return (T) (Boolean.parseBoolean(element) ? Boolean.TRUE : Boolean.FALSE);
-        } else if (type == Integer.class || type == int.class) {
+        } else if (type == int.class || type == Integer.class) {
             return (T) Integer.valueOf(element);
-        } else if (type == Long.class || type == long.class) {
+        } else if (type == long.class || type == Long.class) {
             return (T) Long.valueOf(element);
-        } else if (type == Float.class || type == float.class) {
+        } else if (type == float.class || type == Float.class) {
             return (T) Float.valueOf(element);
-        } else if (type == Short.class || type == short.class) {
+        } else if (type == short.class || type == Short.class) {
             return (T) Short.valueOf(element);
-        } else if (type == Double.class || type == double.class) {
+        } else if (type == double.class || type == Double.class) {
             return (T) Double.valueOf(element);
-        } else if (type == Byte.class || type == byte.class) {
+        } else if (type == byte.class || type == Byte.class) {
             return (T) Byte.valueOf(element);
         } else {
             throw new ArgsException("Type " + type + " not supported");
@@ -206,6 +217,14 @@ public class Args {
 
     public boolean isEmpty() {
         return elements == null || elements.length == 0;
+    }
+
+    public boolean hasProblem() {
+        return problem != null;
+    }
+
+    public Throwable getProblem() {
+        return problem;
     }
 
     public static @NotNull Args of(String source) {

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -28,6 +29,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Created on Aug 21, 2020
  */
 class ArgsTest {
+
+    @Test
+    void testNumberFormatException() {
+        final Args args = new Args("a b c");
+        int a = args.next(int.class, 0);
+
+        assertThat(a, is(0));
+        assertNotNull(args.getProblem());
+    }
 
     @Test
     void testNextString() {
