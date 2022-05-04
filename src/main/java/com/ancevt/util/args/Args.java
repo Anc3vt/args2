@@ -36,22 +36,22 @@ public class Args {
 
     private int index;
 
-    public Args(String source) {
+    public Args(@NotNull String source) {
         this.source = source;
         elements = ArgsSplitter.split(source, '\0');
     }
 
-    public Args(String source, String delimiter) {
+    public Args(@NotNull String source, @NotNull String delimiter) {
         this.source = source;
         elements = ArgsSplitter.split(source, delimiter);
     }
 
-    public Args(String source, char delimiter) {
+    public Args(@NotNull String source, char delimiter) {
         this.source = source;
         elements = ArgsSplitter.split(source, delimiter);
     }
 
-    public Args(String[] args) {
+    public Args(String @NotNull [] args) {
         this.source = collectSource(args);
         elements = args;
     }
@@ -89,7 +89,7 @@ public class Args {
     }
 
     public <T> T next(Class<T> type) {
-        if(index >= elements.length) {
+        if (index >= elements.length) {
             throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
         }
 
@@ -103,7 +103,7 @@ public class Args {
     }
 
     public void setIndex(int index) {
-        if(index >= elements.length) {
+        if (index >= elements.length) {
             throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
         }
 
