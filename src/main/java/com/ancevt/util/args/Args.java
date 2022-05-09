@@ -37,14 +37,14 @@ public class Args {
         elements = ArgsSplitter.split(source, '\0');
     }
 
-    public Args(@NotNull String source, @NotNull String delimiter) {
+    public Args(@NotNull String source, @NotNull String delimiterChar) {
         this.source = source;
-        elements = ArgsSplitter.split(source, delimiter);
+        elements = ArgsSplitter.split(source, delimiterChar);
     }
 
-    public Args(@NotNull String source, char delimiter) {
+    public Args(@NotNull String source, char delimiterChar) {
         this.source = source;
-        elements = ArgsSplitter.split(source, delimiter);
+        elements = ArgsSplitter.split(source, delimiterChar);
     }
 
     public Args(String @NotNull [] args) {
@@ -235,4 +235,31 @@ public class Args {
         return new Args(args);
     }
 
+    public static @NotNull Args of(String source, String delimiterChar) {
+        return new Args(source, delimiterChar);
+    }
+
+    public static @NotNull Args of(String source, char delimiterChar) {
+        return new Args(source, delimiterChar);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
