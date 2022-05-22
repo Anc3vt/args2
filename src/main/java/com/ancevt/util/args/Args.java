@@ -80,6 +80,20 @@ public class Args {
         return false;
     }
 
+    public boolean hasNext() {
+        return index < elements.length;
+    }
+
+    public void skip() {
+        next();
+    }
+
+    public void skip(int count) {
+        for(int i = 0; i < count; i ++) {
+            next();
+        }
+    }
+
     public String next() {
         return next(String.class);
     }

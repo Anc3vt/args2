@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -71,6 +72,18 @@ class ArgsTest {
     }
 
     @Test
+    void testHasNextAndSkip() {
+        final Args args = new Args("a b c");
+        args.skip(2);
+
+        assertTrue(args.hasNext());
+
+        args.skip();
+
+        assertFalse(args.hasNext());
+    }
+
+    @Test
     void testDelimiter() {
         final Args args = new Args("20,30,40,50", ',');
         assertThat(args.next(), is("20"));
@@ -109,19 +122,19 @@ class ArgsTest {
         final Args args = new Args("command --foo bar --last");
         assertTrue(args.contains("--last"));
     }
-    
+
     @Test
     void testQuotes() {
         final Args args = new Args("command --key \"this is value\"");
-        
+
         assertThat(args.getElements().length, is(3));
         assertThat(args.get("--key"), is("this is value"));
     }
-    
+
     @Test
     void testSingleQuotes() {
         final Args args = new Args("command --key 'this is value'");
-        
+
         assertThat(args.getElements().length, is(3));
         assertThat(args.get("--key"), is("this is value"));
     }
