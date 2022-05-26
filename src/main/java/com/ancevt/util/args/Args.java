@@ -20,6 +20,8 @@ package com.ancevt.util.args;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static java.lang.String.format;
 
 public class Args {
@@ -89,7 +91,7 @@ public class Args {
     }
 
     public void skip(int count) {
-        for(int i = 0; i < count; i ++) {
+        for (int i = 0; i < count; i++) {
             next();
         }
     }
@@ -204,10 +206,11 @@ public class Args {
     }
 
     private <T> @Nullable T convertToType(String element, Class<T> type) {
+
         if (type == String.class) {
             return (T) element;
         } else if (type == boolean.class || type == Boolean.class) {
-            return (T) (Boolean.parseBoolean(element) ? Boolean.TRUE : Boolean.FALSE);
+            return (T) (element.equalsIgnoreCase("true") ? Boolean.TRUE : Boolean.FALSE);
         } else if (type == int.class || type == Integer.class) {
             return (T) Integer.valueOf(element);
         } else if (type == long.class || type == Long.class) {
@@ -239,6 +242,22 @@ public class Args {
 
     public Throwable getProblem() {
         return problem;
+    }
+
+    public <T> T convert(T objectToFill) {
+        try {
+            return ArgsReflectionUtil.convert(this, objectToFill);
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public <T> T convert(Class<T> type) {
+        try {
+            return ArgsReflectionUtil.convert(this, type);
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public static @NotNull Args of(String source) {
