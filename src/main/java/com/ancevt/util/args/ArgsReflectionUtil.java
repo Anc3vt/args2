@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 public class ArgsReflectionUtil {
 
@@ -47,7 +48,7 @@ public class ArgsReflectionUtil {
                 }
 
                 if (argsParameterAnnotation.required() && !found)
-                    throw new ArgsException("required parameter not found");
+                    throw new ArgsException("required parameter " + Arrays.toString(names) + " not found");
 
                 continue;
             }
