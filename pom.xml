@@ -25,20 +25,6 @@
         </developer>
     </developers>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>8</java.version>
-
-        <annotations.version>23.0.0</annotations.version>
-        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-        <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
-
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    </properties>
-
     <distributionManagement>
         <repository>
             <id>ancevt</id>
@@ -71,6 +57,20 @@
         </repository>
     </repositories>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>8</java.version>
+
+        <annotations.version>23.0.0</annotations.version>
+        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
+        <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
+
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -78,25 +78,17 @@
             <version>${junit-jupiter-api.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>${annotations.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
             <version>${hamcrest-junit.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.82</version>
         </dependency>
     </dependencies>
     
@@ -114,6 +106,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
