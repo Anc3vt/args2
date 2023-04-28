@@ -17,6 +17,8 @@
  */
 package com.ancevt.util.args;
 
+import com.ancevt.util.args.reflection.ArgsCommand;
+import com.ancevt.util.args.reflection.ArgsParameter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -30,7 +32,7 @@ public class ArgsReflectionTest {
     @Test
     void testCreate() {
         TestConnectionCommand testConnectionCommand
-                = Args.of("connect --host localhost -p 3333 --debug --empty").convert(TestConnectionCommand.class);
+            = Args.of("connect --host localhost -p 3333 --debug --empty").convert(TestConnectionCommand.class);
 
         assertThat(testConnectionCommand.getCommand(), is("connect"));
         assertThat(testConnectionCommand.getHost(), is("localhost"));
@@ -76,15 +78,14 @@ public class ArgsReflectionTest {
             return debug;
         }
 
-        @Contract(pure = true)
         @Override
-        public @NotNull String toString() {
+        public String toString() {
             return "TestConnectionCommand{" +
-                    "command='" + command + '\'' +
-                    ", host='" + host + '\'' +
-                    ", port=" + port +
-                    ", debugMode=" + debug +
-                    '}';
+                "command='" + command + '\'' +
+                ", host='" + host + '\'' +
+                ", port=" + port +
+                ", debug=" + debug +
+                '}';
         }
     }
 }
