@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import static java.lang.String.format;
 
@@ -33,6 +35,8 @@ public class Args {
     private int index;
 
     private Throwable problem;
+
+    private String lastContainsCheckedKey;
 
     public Args(@NotNull String source) {
         this.source = source;
@@ -74,6 +78,7 @@ public class Args {
         for (final String e : elements) {
             for (final String k : keys) {
                 if (e.equals(k)) {
+                    lastContainsCheckedKey = k;
                     return true;
                 }
             }
@@ -138,6 +143,10 @@ public class Args {
 
     public int size() {
         return elements.length;
+    }
+
+    public <T> T get(Class<T> type) {
+        return get(type, lastContainsCheckedKey);
     }
 
     public <T> T get(Class<T> type, int index, T defaultValue) {
@@ -255,7 +264,8 @@ public class Args {
     public <T> T convert(Class<T> type) {
         try {
             return ArgsReflectionUtil.convert(this, type);
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException |
+                 InvocationTargetException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -274,6 +284,16 @@ public class Args {
 
     public static @NotNull Args of(String source, char delimiterChar) {
         return new Args(source, delimiterChar);
+    }
+
+    public static void main(String[] args) {
+        LocalDateTime ld = LocalDateTime.of(2023, 5, 1, 0, 0);
+
+        ZoneId zoneId = ZoneId.systemDefault();
+        long epoch = ld.atZone(zoneId).toEpochSecond() / 60;
+
+        System.out.println(epoch - System.currentTimeMillis() / 1000 / 60);
+
     }
 
 }

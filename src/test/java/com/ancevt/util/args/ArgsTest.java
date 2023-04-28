@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author <a href="mailto:me@ancevt.com">ancevt</a>
@@ -137,5 +138,15 @@ class ArgsTest {
 
         assertThat(args.getElements().length, is(3));
         assertThat(args.get("--key"), is("this is value"));
+    }
+
+    @Test
+    void testLastContainsCheckedKey() {
+        final Args args = new Args("command --host ancevt.com --port 1234 -d true");
+        if (args.contains("-h", "--host")) {
+            assertThat(args.get(String.class), is("ancevt.com"));
+        } else {
+            fail();
+        }
     }
 }
