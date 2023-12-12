@@ -19,6 +19,9 @@ package com.ancevt.util.args;
 
 public class ArgsException extends RuntimeException {
 
+    public ArgsException() {
+    }
+
     public ArgsException(String message) {
         super(message);
     }
@@ -27,4 +30,11 @@ public class ArgsException extends RuntimeException {
         super(message, cause);
     }
 
+    public ArgsException(Throwable cause) {
+        super(cause);
+    }
+
+    public ArgsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

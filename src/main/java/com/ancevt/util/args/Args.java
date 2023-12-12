@@ -108,17 +108,22 @@ public class Args {
 
     public <T> T next(Class<T> type) {
         if (index >= elements.length) {
-            throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
+            throw new ArgsException(format("next: Index out of bounds, index: %d, elements: %d", index, elements.length));
         }
 
         T result = get(type, index);
+
+        if(result == null) {
+            throw new ArgsException(String.format("Args exception no such element at index %d, type: %s", index, type));
+        }
+
         index++;
         return result;
     }
 
     public <T> T next(Class<T> type, T defaultValue) {
         if (index >= elements.length) {
-            throw new ArgsException(format("Index out of bounds, index: %d, elements: %d", index, elements.length));
+            throw new ArgsException(format("next: Index out of bounds, index: %d, elements: %d", index, elements.length));
         }
 
         T result = get(type, index, defaultValue);
