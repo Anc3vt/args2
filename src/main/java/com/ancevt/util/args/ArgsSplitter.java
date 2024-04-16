@@ -17,8 +17,6 @@
  */
 package com.ancevt.util.args;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,7 @@ class ArgsSplitter {
 
     private static final String SPACE_CHARS = "\n\t\r\b ";
 
-    static String @NotNull [] split(final @NotNull String source, char delimiterChar) {
+    static String[] split(final String source, char delimiterChar) {
         final List<String> list = new ArrayList<>();
         final StringBuilder stringBuilder = new StringBuilder();
         int str = -1;
@@ -80,7 +78,7 @@ class ArgsSplitter {
         return list.toArray(new String[]{});
     }
 
-    public static String @NotNull [] split(String source, @NotNull String delimiterChar) {
+    public static String[] split(String source, String delimiterChar) {
         if (delimiterChar.length() != 1) {
             throw new ArgsException("delimiter string must contain one character");
         }

@@ -19,8 +19,6 @@ package com.ancevt.util.args.reflection;
 
 import com.ancevt.util.args.Args;
 import com.ancevt.util.args.ArgsException;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -29,8 +27,7 @@ import java.util.Arrays;
 
 public class ArgsReflectionUtil {
 
-    @Contract("_, _ -> param2")
-    public static <T> @NotNull T convert(Args args, @NotNull T objectToFill) throws IllegalAccessException {
+    public static <T> T convert(Args args, T objectToFill) throws IllegalAccessException {
         Class<T> type = (Class<T>) objectToFill.getClass();
 
         for (Field field : type.getDeclaredFields()) {
@@ -76,11 +73,11 @@ public class ArgsReflectionUtil {
         return objectToFill;
     }
 
-    public static <T> @NotNull T convert(Args args, @NotNull Class<T> type)
-            throws NoSuchMethodException,
-            InvocationTargetException,
-            InstantiationException,
-            IllegalAccessException {
+    public static <T> T convert(Args args, Class<T> type)
+        throws NoSuchMethodException,
+        InvocationTargetException,
+        InstantiationException,
+        IllegalAccessException {
 
         Constructor<T> constructor = type.getDeclaredConstructor();
         constructor.setAccessible(true);

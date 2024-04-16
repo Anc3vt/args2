@@ -18,8 +18,6 @@
 package com.ancevt.util.args;
 
 import com.ancevt.util.args.reflection.ArgsReflectionUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
@@ -39,27 +37,27 @@ public class Args {
 
     private String lastContainsCheckedKey;
 
-    public Args(@NotNull String source) {
+    public Args(String source) {
         this.source = source;
         elements = ArgsSplitter.split(source, '\0');
     }
 
-    public Args(@NotNull String source, @NotNull String delimiterChar) {
+    public Args(String source, String delimiterChar) {
         this.source = source;
         elements = ArgsSplitter.split(source, delimiterChar);
     }
 
-    public Args(@NotNull String source, char delimiterChar) {
+    public Args(String source, char delimiterChar) {
         this.source = source;
         elements = ArgsSplitter.split(source, delimiterChar);
     }
 
-    public Args(String @NotNull [] args) {
+    public Args(String[] args) {
         this.source = collectSource(args);
         elements = args;
     }
 
-    private @NotNull String collectSource(String @NotNull [] args) {
+    private String collectSource(String[] args) {
         final StringBuilder stringBuilder = new StringBuilder();
         for (String a : args) {
             a = a.replace("\"", "\\\\\"");
@@ -113,7 +111,7 @@ public class Args {
 
         T result = get(type, index);
 
-        if(result == null) {
+        if (result == null) {
             throw new ArgsException(String.format("Args exception no such element at index %d, type: %s", index, type));
         }
 
@@ -182,7 +180,7 @@ public class Args {
         return defaultValue;
     }
 
-    public <T> T get(Class<T> type, String @NotNull [] keys, T defaultValue) {
+    public <T> T get(Class<T> type, String[] keys, T defaultValue) {
         for (final String key : keys) {
             for (int i = 0; i < elements.length - 1; i++) {
                 final String currentArgs = elements[i];
@@ -220,7 +218,7 @@ public class Args {
         return get(String.class, keys);
     }
 
-    private <T> @Nullable T convertToType(String element, Class<T> type) {
+    private <T> T convertToType(String element, Class<T> type) {
 
         if (type == String.class) {
             return (T) element;
@@ -276,19 +274,19 @@ public class Args {
         }
     }
 
-    public static @NotNull Args of(String source) {
+    public static Args of(String source) {
         return new Args(source);
     }
 
-    public static @NotNull Args of(String[] args) {
+    public static Args of(String[] args) {
         return new Args(args);
     }
 
-    public static @NotNull Args of(String source, String delimiterChar) {
+    public static Args of(String source, String delimiterChar) {
         return new Args(source, delimiterChar);
     }
 
-    public static @NotNull Args of(String source, char delimiterChar) {
+    public static Args of(String source, char delimiterChar) {
         return new Args(source, delimiterChar);
     }
 

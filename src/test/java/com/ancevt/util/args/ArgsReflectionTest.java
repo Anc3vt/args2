@@ -19,15 +19,13 @@ package com.ancevt.util.args;
 
 import com.ancevt.util.args.reflection.ArgsCommand;
 import com.ancevt.util.args.reflection.ArgsParameter;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ArgsReflectionTest {
+class ArgsReflectionTest {
 
     @Test
     void testCreate() {
