@@ -20,8 +20,6 @@ package com.ancevt.util.args;
 import com.ancevt.util.args.reflection.ArgsReflectionUtil;
 
 import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import static java.lang.String.format;
 
@@ -55,6 +53,11 @@ public class Args {
     public Args(String[] args) {
         this.source = collectSource(args);
         elements = args;
+    }
+
+    @Override
+    public String toString() {
+        return source;
     }
 
     private String collectSource(String[] args) {
@@ -290,33 +293,4 @@ public class Args {
         return new Args(source, delimiterChar);
     }
 
-    public static void main(String[] args) {
-        LocalDateTime ld = LocalDateTime.of(2023, 5, 1, 0, 0);
-
-        ZoneId zoneId = ZoneId.systemDefault();
-        long epoch = ld.atZone(zoneId).toEpochSecond() / 60;
-
-        System.out.println(epoch - System.currentTimeMillis() / 1000 / 60);
-
-    }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
